@@ -11,8 +11,8 @@ $ ./go-docker
 ```
 
 ```bash
-$ curl http://localhost:8080?name=Rajeev
-Hello, Rajeev
+$ curl http://localhost:8080?name=Abbas
+Hello, Abbas
 ```
 
 ## Building and running the docker image
