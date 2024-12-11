@@ -17,7 +17,9 @@ jobs:
           command: printenv
       - run:
           name: Print Current User
-          command: whoami
+          command: |
+            whoami
+            cat /etc/os-release
       - run:
           name: Print Working Directory
           command: pwd
@@ -95,8 +97,7 @@ workflows:
             - test-go
       - docker/publish:
           image: mdabbasali/gohelloworld
-          tag: v0.0.2,latest
-          update-description: true
+          tag: v0.0.3,latest
           requires:
             - build-go-executables
     # - deploy:
