@@ -2,6 +2,23 @@
 # Stacks detected: artifact:go-executable:,deps:go:.
 version: 2.1
 jobs:
+  debug-job:
+    docker:
+      - image: cimg/base:2024.12  # Replace with your executor image
+    steps:
+      - checkout  # Optional, checks out your repository
+      - run:
+          name: Print Environment Variables
+          command: printenv
+      - run:
+          name: Print Current User
+          command: whoami
+      - run:
+          name: Print Working Directory
+          command: pwd
+      - run:
+          name: List Files in Current Directory
+          command: ls -al
   test-go:
     # Install go modules and run tests
     docker:
