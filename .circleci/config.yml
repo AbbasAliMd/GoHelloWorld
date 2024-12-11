@@ -76,13 +76,6 @@ jobs:
       - store_artifacts:
           path: ~/artifacts
           destination: executables
-  docker-publish:
-    steps:
-      - checkout
-      - docker/publish:
-          image: mdabbasali/gohelloworld
-          tag: v0.0.2,latest
-          dockerfile: ./Dockerfile
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
@@ -100,7 +93,10 @@ workflows:
       - build-go-executables:
           requires:
             - test-go
-      - docker-publish:
+      - docker/publish:
+          image: mdabbasali/gohelloworld
+          tag: v0.0.2,latest
+          update-description: true
           requires:
             - build-go-executables
     # - deploy:
