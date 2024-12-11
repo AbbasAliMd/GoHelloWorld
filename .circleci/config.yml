@@ -1,6 +1,11 @@
 # This config was automatically generated from your source code
 # Stacks detected: artifact:go-executable:,deps:go:.
 version: 2.1
+
+# Using Docker orb for publishing
+orbs:
+  docker: circleci/docker@2.8.1
+
 jobs:
   debug-job:
     docker:
@@ -71,6 +76,13 @@ jobs:
       - store_artifacts:
           path: ~/artifacts
           destination: executables
+  docker-publish:
+    steps:
+      - checkout
+      - docker/publish:
+          image: mdabbasali/gohelloworld
+          tag: v0.0.2,latest
+          dockerfile: ./Dockerfile
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
@@ -88,6 +100,9 @@ workflows:
       - build-go-executables:
           requires:
             - test-go
+      - docker-publish:
+          requires:
+            - build-go-executables
     # - deploy:
     #     requires:
     #       - build-go-executables
