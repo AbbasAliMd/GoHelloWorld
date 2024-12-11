@@ -83,6 +83,7 @@ jobs:
 workflows:
   build-and-test:
     jobs:
+      - debug-job
       - test-go
       - build-go-executables:
           requires:
